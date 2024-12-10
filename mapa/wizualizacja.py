@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-gminy_shp = gpd.read_file("C:\\Users\\zurek\\OneDrive\\Pulpit\\DataTeam-main\\DataTeam\\mapa\\gminy.shp")
+gminy_shp = gpd.read_file("C:\\Users\\klaud\\git\\DataTeam\\mapa\\gminy.shp")
 
-data = pd.read_excel("C:\\Users\\zurek\\OneDrive\\Pulpit\\DataTeam-main\\DataTeam\\mapa\\Tabela_IV.xls")
+data = pd.read_excel("C:\\Users\\klaud\\git\\DataTeam\\mapa\\Tabela_IV.xls")
 data = data.iloc[9:, [1, 18]]
 data.columns = ['JPT_KOD_JE', 'Przyrost naturalny']  
 
