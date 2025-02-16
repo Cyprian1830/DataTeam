@@ -3,18 +3,22 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-poparcie_polityczne = pd.read_excel("C:\\Users\\cypri\\Desktop\\Python_projects\\PrzyrostNaturalny_Polityka\\wyniki_gl_na_listy_po_powiatach_proc_sejm_utf8.xlsx", dtype={'JPT_KOD_JE': str})
-mapa_polski = gpd.read_file("C:\\Users\\cypri\\Desktop\\Python_projects\\PrzyrostNaturalny_Polityka\\A02_Granice_powiatow.shp")
+poparcie_polityczne = pd.read_excel("C:\\Users\\cypri\\Desktop\\Python_projects\\PrzyrostNaturalny_Polityka"
+                                    "\\wyniki_gl_na_listy_po_powiatach_proc_sejm_utf8.xlsx", dtype={'JPT_KOD_JE': str})
+mapa_polski = gpd.read_file("C:\\Users\\cypri\\Desktop\\Pyt"
+                            "hon_projects\\PrzyrostNaturalny_Polityka\\A02_Granice_powiatow.shp")
 poparcie_polityczne = poparcie_polityczne.iloc[0:, [0, 13]]
 poparcie_polityczne.columns = ['JPT_KOD_JE', 'Poparcie polityczne']
 poparcie_polityczne['JPT_KOD_JE'] = sorted(poparcie_polityczne['JPT_KOD_JE'].astype(str).str.zfill(4))
 mapa_polski['JPT_KOD_JE'] = sorted(mapa_polski['JPT_KOD_JE'])
 
 
-poparcie_polityczne['Poparcie polityczne'] = poparcie_polityczne['Poparcie polityczne'].str.replace(',', '.', regex=False)
+poparcie_polityczne['Poparcie polityczne'] = (poparcie_polityczne['Poparcie polityczne'].
+                                              str.replace(',', '.', regex=False))
 
 # Konwersja na wartości numeryczne
-poparcie_polityczne['Poparcie polityczne'] = pd.to_numeric(poparcie_polityczne['Poparcie polityczne'], errors='coerce')
+poparcie_polityczne['Poparcie polityczne'] = (pd.to_numeric
+                                              (poparcie_polityczne['Poparcie polityczne'], errors='coerce'))
 
 poparcie_polityczne['Poparcie polityczne'] = pd.to_numeric(poparcie_polityczne['Poparcie polityczne'])
 gminy_joined = mapa_polski.merge(poparcie_polityczne, on='JPT_KOD_JE', how='left')
